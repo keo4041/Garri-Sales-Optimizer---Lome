@@ -371,7 +371,6 @@
                         console.error("Réponse brute de l'IA:", jsonString);
                         throw new Error("N'a pas pu extraire un objet JSON valide de la réponse de l'IA.");
                     }
-                    print(jsonMatch)
                     
                     // Analyser la chaîne JSON extraite
                     const strategy = JSON.parse(jsonMatch[0]);
@@ -412,7 +411,6 @@
                 
                 try {
                     const textResponse = await callCloudRunProxy(userPrompt, systemPrompt, true);
-                    print(textResponse)
                     // Basic markdown-like replacement for newlines
                     const text = textResponse.replace(/\n/g, '<br>');
                     marketInsights.innerHTML = text;
