@@ -323,7 +323,7 @@
                     grounded: grounded
                 };
 
-                const response = await fetchWithTimeout(CLOUD_RUN_FUNCTION_URL, {
+                const response = await fetch(CLOUD_RUN_FUNCTION_URL, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(payload)
