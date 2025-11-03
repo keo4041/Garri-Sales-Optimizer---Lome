@@ -402,6 +402,7 @@
                 
                 try {
                     const textResponse = await callCloudRunProxy(userPrompt, systemPrompt, true);
+                    print(textResponse)
                     // Basic markdown-like replacement for newlines
                     const text = textResponse.replace(/\n/g, '<br>');
                     marketInsights.innerHTML = text;
