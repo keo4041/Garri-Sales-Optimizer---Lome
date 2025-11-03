@@ -364,7 +364,17 @@
 
                 try {
                     const jsonString = await callCloudRunProxy(userPrompt, systemPrompt, false);
-                    const strategy = JSON.parse(jsonString);
+                    // Extraire la partie JSON de la réponse, en ignorant les ``` ou autre texte.
+                    const jsonMatch = jsonString.match(/{[\s\S]*}/);
+
+                    if (!jsonMatch || !jsonMatch[0]) {
+                        console.error("Réponse brute de l'IA:", jsonString);
+                        throw new Error("N'a pas pu extraire un objet JSON valide de la réponse de l'IA.");
+                    }
+                    print(jsonMatch)
+                    
+                    // Analyser la chaîne JSON extraite
+                    const strategy = JSON.parse(jsonMatch[0]);
                     
                     const p1Bags = Math.round(inventory * (strategy.phase1.percent / 100));
                     const p2Bags = Math.round(inventory * (strategy.phase2.percent / 100));
